@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import styles from './ProductPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const ProductPage = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -20,11 +20,11 @@ const ProductPage = () => {
         setLoading(true);
 
         // Fetch product details
-        const { data: productData } = await axios.get(`/api/v1/product/${id}`);
+        const { data: productData } = await axios.get(`${API}/api/v1/product/${id}`);
         setProduct(productData.product);
 
         // Fetch product reviews
-        const { data: reviewsData } = await axios.get(`/api/reviews/${id}`);
+        const { data: reviewsData } = await axios.get(`${API}/api/reviews/${id}`);
         setReviews(reviewsData);
 
         setLoading(false);

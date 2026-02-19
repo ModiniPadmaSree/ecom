@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 import styles from './ProductsPage.module.css'; // Create this CSS module
-
+const API = process.env.REACT_APP_API_URL;
 const ProductsPage = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -20,7 +20,7 @@ const ProductsPage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        let endpoint = '/api/v1/products';
+        let endpoint = `${API}/api/v1/products`;
         if (category) {
           endpoint += `?category=${encodeURIComponent(category)}`;
         }

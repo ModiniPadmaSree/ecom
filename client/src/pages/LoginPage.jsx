@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import styles from './LoginPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ const LoginPage = () => {
       };
 
       const { data } = await axios.post(
-        '/api/v1/login',
+        `${API}/api/v1/login`,
         { email, password },
         config
       );

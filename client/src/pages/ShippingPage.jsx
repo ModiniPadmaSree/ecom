@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ShippingPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const ShippingPage = () => {
   const navigate = useNavigate();
   const [shippingInfo, setShippingInfo] = useState({
@@ -19,7 +19,7 @@ const ShippingPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo)); // Save in localStorage
+    localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo));
     navigate('/placeorder');
   };
 

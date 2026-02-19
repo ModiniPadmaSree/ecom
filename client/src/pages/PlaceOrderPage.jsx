@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './PlaceOrderPage.module.css';
 import { loadStripe } from '@stripe/stripe-js';
-
+const API = process.env.REACT_APP_API_URL;
 const stripePromise = loadStripe('pk_test_51RkxLvCmNCk36eUSScZeaSctqGPGzdUNkuSCnPBkoW8d9Awpkju95riVeTC33xtg55VxQrgUGLCIz0jW7xYFIKs600QroSExBV');
 
 const PlaceOrderPage = () => {
@@ -24,7 +24,7 @@ const PlaceOrderPage = () => {
   useEffect(() => {
     const fetchCoupons = async () => {
       try {
-        const { data } = await axios.get('/api/v1/coupons');
+        const { data } = await axios.get(`${API}/api/v1/coupons`);
         setCoupons(data);
       } catch (error) {
         console.error('Failed to fetch coupons:', error);
@@ -82,7 +82,7 @@ const PlaceOrderPage = () => {
       };
 
       const { data: orderData } = await axios.post(
-        '/api/v1/order/new',
+        `${API}/api/v1/order/new`,
         orderPayload,
         config
       );
@@ -90,7 +90,7 @@ const PlaceOrderPage = () => {
       const orderId = orderData.order._id;
 
       const { data: stripeData } = await axios.post(
-        '/api/v1/payment/checkout',
+        `${API}/api/v1/payment/checkout`,
         {
           orderItems: orderPayload.orderItems,
           shippingInfo,

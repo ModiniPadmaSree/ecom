@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './MyOrdersPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const MyOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const MyOrdersPage = () => {
       try {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const { data } = await axios.get('/api/v1/orders/me', config);
+        const { data } = await axios.get(`${API}/api/v1/orders/me`, config);
         setOrders(data.orders);
       } catch (err) {
         setError(err.response?.data?.message || err.message);

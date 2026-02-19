@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import styles from './RegisterPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -35,7 +35,7 @@ const RegisterPage = () => {
       };
 
       const { data } = await axios.post(
-        '/api/v1/register',
+        `${API}/api/v1/register`,
         { name, email, password },
         config
       );

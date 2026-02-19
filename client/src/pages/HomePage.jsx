@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css'; 
-
+const API = process.env.REACT_APP_API_URL;
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const HomePage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get('/api/v1/products');
+        const { data } = await axios.get(`${API}/api/v1/products`);
         setProducts(data.products);
         console.log("Fetched Products:", data.products); // Keep this for debugging
         setLoading(false);

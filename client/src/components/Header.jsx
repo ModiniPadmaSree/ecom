@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Header.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const Header = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
@@ -60,7 +60,7 @@ const Header = () => {
       }
 
       try {
-        const { data } = await axios.get(`/api/v1/products?keyword=${keyword}`);
+        const { data } = await axios.get(`${API}/api/v1/products?keyword=${keyword}`);
         setResults(data.products || []);
         setShowSearchDropdown(true);
       } catch (err) {

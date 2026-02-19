@@ -3,7 +3,7 @@ import { useParams, useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Message from '../components/Message';
 import styles from './CartPage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const CartPage = () => {
   const { id: productId } = useParams();
   const location = useLocation();
@@ -23,7 +23,7 @@ const CartPage = () => {
       if (productId) {
         setLoading(true);
         try {
-          const { data } = await axios.get(`/api/v1/product/${productId}`);
+          const { data } = await axios.get(`${API}/api/v1/product/${productId}`);
           const newItem = {
             product: data.product._id,
             name: data.product.name,

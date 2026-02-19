@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import styles from './ProfilePage.module.css';
-
+const API = process.env.REACT_APP_API_URL;
 const ProfilePage = () => {
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const ProfilePage = () => {
               Authorization: `Bearer ${token}`,
             },
           };
-          const { data } = await axios.get('/api/v1/me', config);
+          const { data } = await axios.get(`${API}/api/v1/me`, config);
           setUser(data.user);
           setName(data.user.name);
           setEmail(data.user.email);
@@ -80,7 +80,7 @@ const ProfilePage = () => {
         },
       };
 
-      const { data } = await axios.put('/api/v1/me/update', { name, email }, config);
+      const { data } = await axios.put(`${API}/api/v1/me/update`, { name, email }, config);
 
       setUpdateMessage('Profile updated successfully!');
       const updatedUserInfo = { ...userInfo, name: data.user.name, email: data.user.email };
@@ -114,7 +114,7 @@ const ProfilePage = () => {
         },
       };
 
-      await axios.put('/api/v1/password/update', { oldPassword, newPassword, confirmPassword }, config);
+      await axios.put(`${API}/api/v1/password/update`, { oldPassword, newPassword, confirmPassword }, config);
 
       setUpdateMessage('Password updated successfully!');
       setOldPassword('');

@@ -1,0 +1,207 @@
+.header {
+  background: linear-gradient( #3a393a, #858387);
+  padding: 1rem;
+  border-bottom: 1px solid #121212;
+  color: #2d2d2d;
+  font-family: 'Georgia', serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
+.header-logo {
+  color: #edf1ea;
+  font-size: 1.8rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-logo:hover {
+  color: #fbfefd;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav a,
+.header-dropdown-toggle {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.header-nav a:hover,
+.header-dropdown-toggle:hover {
+  color: #f4c430;
+}
+
+.header-dropdown {
+  position: relative;
+}
+
+.header-dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  padding: 0.5rem 0;
+  min-width: 150px;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.header-dropdown.open .header-dropdown-menu {
+  display: flex;
+}
+
+.header-dropdown-menu a,
+.header-dropdown-menu button {
+  color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.header-dropdown-menu a:hover,
+.header-dropdown-menu button:hover {
+  background-color: #3a3a3a;
+  color: #f4c430;
+}
+/* Search Container */
+.searchForm {
+  display: flex;
+  align-items: center;
+  background-color: #f3f4f6;
+  border-radius: 30px;
+  padding: 4px;
+  border: 1px solid #d1d5db;
+  transition: 0.3s ease;
+}
+
+.searchForm:focus-within {
+  border-color: #6b7280;
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.3);
+}
+
+/* Search Input */
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 8px 12px;
+  width: 220px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Search Button */
+/* Search button container */
+.searchDropdown {
+  position: absolute;
+  top: 100%; /* just below the search input */
+  left: 0;
+  right: 0; /* stretch to search wrapper width */
+  max-height: 400px; /* max height */
+  overflow-y: auto; /* scroll if too many results */
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  margin-top: 5px; /* small gap below input */
+}.searchItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.searchItem:hover {
+  background-color: #f5f5f5;
+}
+
+/* Image inside search item */
+.searchItemImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.searchItemName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Product price */
+.searchItemPrice {
+  font-size: 0.85rem;
+  color: #f49f30; /* accent color */
+  font-weight: bold;
+}
+.searchButton {
+  width: 40px;              /* fixed width */
+  height: 40px;             /* fixed height */
+  border: none;             /* remove default button border */
+  background-color: transparent; /* transparent background */
+  cursor: pointer;          /* pointer on hover */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.2s ease, filter 0.2s ease; /* smooth hover effect */
+}
+
+/* Image inside button */
+.searchButton img {
+  width: 70%;               /* scale image inside button */
+  height: 70%;
+  object-fit: contain;      /* maintain aspect ratio */
+}
+
+/* Hover effect */
+.searchButton:hover {
+  transform: scale(1.1);    /* slight zoom */
+  filter: brightness(1.2);  /* make icon brighter */
+}
+
+/* Active / click effect */
+.searchButton:active {
+  transform: scale(0.95);   /* slight press effect */
+}

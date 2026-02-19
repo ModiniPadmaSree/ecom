@@ -1,0 +1,55 @@
+.footer {
+  background: linear-gradient(#8b8888, #0c0c0c);
+  color: #ccc;
+  padding: 40px 20px;
+}
+
+.footerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.section {
+  flex: 1 1 200px;
+}
+
+.section h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkList li {
+  margin: 5px 0;
+}
+
+.linkList a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.linkList a:hover {
+  text-decoration: underline;
+}
+
+.socialIcons a img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  
+}
+
+.bottomBar {
+  text-align: center;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+  padding-top: 15px;
+  font-size: 14px;
+}

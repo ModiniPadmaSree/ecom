@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "seed": "node server/seed.js",
+"start": "node backend/server.js",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm start --prefix client\"",
+    "client": "npm start --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^17.2.0",
+    "mongoose": "^8.16.4"
+  }
+}

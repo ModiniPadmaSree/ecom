@@ -1,0 +1,33 @@
+.message {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-family: 'Georgia', serif;
+  margin: 1rem 0;
+}
+
+/* Alert types */
+.info {
+  background-color: #1e3a5f;
+  color: #cce4ff;
+  border: 1px solid #3b82f6;
+}
+
+.success {
+  background-color: #1f4036;
+  color: #a7ffcc;
+  border: 1px solid #10b981;
+}
+
+.error {
+  background-color: #4b1f1f;
+  color: #ffb3b3;
+  border: 1px solid #ef4444;
+}
+
+.warning {
+  background-color: #4b3a1f;
+  color: #ffe4b3;
+  border: 1px solid #f59e0b;
+}

@@ -1,0 +1,92 @@
+.registerContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db, #9ca3af);
+  padding: 20px;
+}
+
+.registerCard {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+}
+
+.registerCard:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.registerTitle {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #1f2937;
+}
+
+.registerLabel {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.registerInput {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.registerInput:focus {
+  outline: none;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.3);
+  background-color: #ffffff;
+}
+
+.registerButton {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #374151;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.registerButton:hover {
+  background-color: #1f2937;
+  transform: translateY(-2px);
+}
+
+.registerFooter {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.registerLink {
+  color: #1f2937;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}

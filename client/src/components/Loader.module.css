@@ -1,0 +1,30 @@
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ccc;
+  font-family: 'Georgia', serif;
+  padding: 2rem 0;
+}
+
+.spinner {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-bottom-color: #f4c430;
+  animation: spin 1s linear infinite;
+  margin-right: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+}

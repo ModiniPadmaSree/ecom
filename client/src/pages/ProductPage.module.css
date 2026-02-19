@@ -1,0 +1,170 @@
+.wrapper {
+  padding: 2rem 1rem;
+  color: #e0e0e0;
+  font-family: 'Georgia', serif;
+}
+
+.backLink {
+  color: #4da6ff;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  max-height: 400px;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #f4c430;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.rating span:last-child {
+  color: #bbbbbb;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.stock {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.inStock {
+  color: #16c784;
+}
+
+.outOfStock {
+  color: #ef4444;
+}
+
+.qtyWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.qtyLabel {
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+.qtySelect {
+  padding: 0.5rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+.addToCartBtn {
+  margin-left: 1rem;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addToCartBtn:hover {
+  background-color: #2563eb;
+}
+
+.addToCartBtn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+.reviewsSection {
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.reviewCard {
+  background: #f9f9f9;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.reviewRating {
+  font-weight: bold;
+  color: #ffa500;
+  margin-bottom: 0.25rem;
+}
+
+.reviewComment {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.noReviews {
+  margin-top: 1rem;
+  color: #888;
+}

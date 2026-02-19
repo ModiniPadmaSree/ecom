@@ -1,0 +1,662 @@
+/* client/src/pages/HomePage.module.css */
+
+/* Main wrapper for the entire page content */
+/* Using user's .wrapper as the main container */
+  /* No speciic styles here, just a container */
+
+
+/* General container for sections (used for padding/max-width) */
+.sectionContainer {
+  padding: 2rem 1.5rem; /* More consistent padding */
+  max-width: 1200px;
+  margin: 0 auto;
+}/* client/src/pages/HomePage.module.css */
+
+/* Main wrapper for the entire page content */
+
+
+/* General container for sections (used for padding/max-width) */
+.sectionContainer {
+  padding: 2rem 1.5rem; /* More consistent padding */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* General style for section titles */
+.sectionTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #2c3e50; /* A dark, professional blue */
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #f39c12; /* Amazon-like orange accent */
+  border-radius: 2px;
+}
+
+
+/* --- Hero Section Styles --- */
+.heroSection {
+  background: linear-gradient(rgba(207, 206, 206, 0.6), rgba(171, 169, 169, 0.6)), url('https://placehold.co/1600x600/34495e/ffffff?text=E-commerce+Banner') center center/cover no-repeat;
+  color: #ffffff;
+  text-align: center;
+  padding: 6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+}
+
+.heroContent {
+  max-width: 800px;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroButton {
+  display: inline-block;
+  background-color: #f39c12;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.heroButton:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+/* --- Categories Section Styles --- */
+.categoriesSection {
+  margin-bottom: 3rem;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.categoryImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.categoryName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  padding: 0 1rem;
+}
+
+/* --- Why Choose Us Section Styles (NEW) --- */
+.whyChooseUsSection {
+  background-color: #eaf2f8; /* Light blue background */
+  padding: 3rem 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.whyChooseUsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.featureCard {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.featureIcon {
+  font-size: 3rem; /* Large icon size */
+  color: #007bff; /* Primary blue color */
+  margin-bottom: 1rem;
+}
+
+.featureTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.featureDescription {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+
+/* --- Latest Products Section Styles (Integrated with your provided styles) --- */
+.productsSection {
+  padding-top: 0; /* Adjust padding as sectionTitle already has margin */
+}
+
+.grid { /* Your original .grid styles */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card { /* Your original .card styles, combined with enhancements */
+  background-color: #817f84; /* Your background color */
+  color: #3c113e; /* Your text color */
+  border-radius: 20px; /* Your border-radius */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(46, 4, 100, 0.6); /* Your box-shadow */
+  transition: transform 0.3s ease; /* Your transition */
+  display: flex; /* Added for better internal layout */
+  flex-direction: column; /* Added for better internal layout */
+  border: 1px solid #706f72; /* Subtle border to match your colors */
+}
+
+.card:hover { /* Your original .card:hover styles */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(46, 4, 100, 0.8); /* Enhanced shadow on hover */
+}
+
+.card img { /* Your original .card img styles */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(60, 17, 62, 0.2); /* Subtle separator */
+}
+
+.cardContent { /* Your original .cardContent styles */
+  padding: 1rem;
+  flex-grow: 1; /* Allows content to take available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.productName { /* Your original .productName styles */
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e1d1e;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productName a {
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.productName a:hover {
+  color: #f5fbfd; /* Hover color to match your palette */
+}
+
+.productPrice { /* Your original .productPrice styles */
+  font-size: 1.1rem; /* Slightly adjusted for better hierarchy */
+  color: #f3efeb;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.productRating { /* Your original .productRating styles */
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #fdfbf6;
+}
+
+.productStars { /* New class for stars */
+  color: #e7b06e; /* Your star color */
+  margin-right: 0.25rem;
+}
+
+.productReviews { /* New class for reviews count */
+  color: #d1d5db; /* Your reviews count color */
+}
+
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+  .heroSubtitle {
+    font-size: 1.3rem;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 4rem 1rem;
+    min-height: 350px;
+  }
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+  .heroSubtitle {
+    font-size: 1.1rem;
+  }
+  .heroButton {
+    font-size: 1rem;
+    padding: 0.7rem 1.8rem;
+  }
+  .categoryGrid, .grid, .whyChooseUsGrid { /* Apply to all grids */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller cards on tablets */
+    gap: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+  .sectionContainer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 3rem 0.75rem;
+    min-height: 300px;
+  }
+  .heroTitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .heroSubtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .heroButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+  }
+  .categoryGrid, .grid, .whyChooseUsGrid { /* Apply to all grids */
+    grid-template-columns: 1fr; /* Single column on small mobiles */
+  }
+  .sectionTitle {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .sectionContainer {
+    padding: 1rem 0.75rem;
+  }
+  .card img { /* Adjust image height for smaller screens */
+    height: 150px;
+  }
+}
+
+
+/* General style for section titles */
+.sectionTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #2c3e50; /* A dark, professional blue */
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #f39c12; /* Amazon-like orange accent */
+  border-radius: 2px;
+}
+
+
+/* --- Hero Section Styles --- */
+.heroSection {
+  background: linear-gradient( rgba(62, 60, 62, 0.733)), url('https://cdn.dribbble.com/userupload/3588537/file/original-962400ca8b3bededc2718d3784fc7810.png?resize=752x&vertical=center') center center/cover no-repeat;
+  color: #ffffff;
+  text-align: center;
+  padding: 6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+}
+
+.heroContent {
+  max-width: 800px;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroButton {
+  display: inline-block;
+  background-color: #434442;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.heroButton:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+/* --- Categories Section Styles --- */
+.categoriesSection {
+  margin-bottom: 3rem;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.categoryImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.categoryName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  padding: 0 1rem;
+}
+
+/* --- Latest Products Section Styles (Integrated with your provided styles) --- */
+.productsSection {
+  padding-top: 0; /* Adjust padding as sectionTitle already has margin */
+}
+
+.grid { /* Your original .grid styles */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card { /* Your original .card styles, combined with enhancements */
+  background-color: #817f84; /* Your background color */
+  color: #3c113e; /* Your text color */
+  border-radius: 10px; /* Your border-radius */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(46, 4, 100, 0.6); /* Your box-shadow */
+  transition: transform 0.3s ease; /* Your transition */
+  display: flex; /* Added for better internal layout */
+  flex-direction: column; /* Added for better internal layout */
+  border: 1px solid #706f72; /* Subtle border to match your colors */
+}
+
+.card:hover { /* Your original .card:hover styles */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(46, 4, 100, 0.8); /* Enhanced shadow on hover */
+}
+
+.card img { /* Your original .card img styles */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(60, 17, 62, 0.2); /* Subtle separator */
+}
+
+.cardContent { /* Your original .cardContent styles */
+  padding: 1rem;
+  flex-grow: 1; /* Allows content to take available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.productName { /* Your original .productName styles */
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e1d1e;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productName a {
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.productName a:hover {
+  color: #f49f30; /* Hover color to match your palette */
+}
+
+.productPrice { /* Your original .productPrice styles */
+  font-size: 1.1rem; /* Slightly adjusted for better hierarchy */
+  color: #f49f30;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.productRating { /* Your original .productRating styles */
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+
+.productStars { /* New class for stars */
+  color: #e7b06e; /* Your star color */
+  margin-right: 0.25rem;
+}
+
+.productReviews { /* New class for reviews count */
+  color: #d1d5db; /* Your reviews count color */
+}
+
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+  .heroSubtitle {
+    font-size: 1.3rem;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 4rem 1rem;
+    min-height: 350px;
+  }
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+  .heroSubtitle {
+    font-size: 1.1rem;
+  }
+  .heroButton {
+    font-size: 1rem;
+    padding: 0.7rem 1.8rem;
+  }
+  .categoryGrid, .grid { /* Apply to both grids */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller cards on tablets */
+    gap: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+  .sectionContainer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 3rem 0.75rem;
+    min-height: 300px;
+  }
+  .heroTitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .heroSubtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .heroButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+  }
+  .categoryGrid, .grid { /* Apply to both grids */
+    grid-template-columns: 1fr; /* Single column on small mobiles */
+  }
+  .sectionTitle {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .sectionContainer {
+    padding: 1rem 0.75rem;
+  }
+  .card img { /* Adjust image height for smaller screens */
+    height: 150px; /* Adjusted to be consistent with category images */
+  }
+}

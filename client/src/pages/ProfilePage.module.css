@@ -1,0 +1,142 @@
+/* ProfilePage.module.css */
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #f4f6f8;
+  min-height: 100vh;
+}
+
+.profileCard {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.profileSidebar {
+  flex: 1 1 300px;
+  background: linear-gradient(135deg, #8d8e91, #0e0e0f);
+  color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.profileName {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.profileEmail {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profileRole {
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.btn-red {
+  background: #ff4b5c;
+  color: #ffffff;
+}
+
+.btn-red:hover {
+  background: #e04352;
+}
+
+.btn-purple {
+  background: #46416e;
+  color: #ffffff;
+}
+
+.btn-purple:hover {
+  background: #565184;
+}
+
+.formSection {
+  flex: 2 1 500px;
+  padding: 2rem;
+}
+
+.formHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333333;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555555;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.formInput:focus {
+  border-color: #764ba2;
+  outline: none;
+}
+
+.formButton {
+  background: #616a94;
+  color: #ffffff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.formButton:hover {
+  background: #656cab;
+}
+
+@media (max-width: 768px) {
+  .profileCard {
+    flex-direction: column;
+  }
+
+  .profileSidebar {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 12px;
+  }
+
+  .formSection {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,109 @@
+/* client/src/index.css */
+
+/* Basic CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif; /* Using Inter font, fallback to sans-serif */
+  line-height: 1.6; /* Slightly increased line height for readability */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f2f2f6; /* A very light, subtle gray background */
+  color: #333; /* Default text color */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Inherit color from parent by default */
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Basic form element styling - slightly refined */
+input,
+textarea,
+select {
+  font-family: 'Inter', sans-serif;
+  padding: 0.6rem 0.8rem; /* Slightly more padding */
+  border: 1px solid #dcdcdc; /* Lighter border */
+  border-radius: 0.375rem; /* Slightly more rounded */
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight on focus */
+  box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.2); /* Softer focus shadow */
+}
+
+/* General utility classes (if needed, but aim for semantic) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem; /* Slightly more horizontal padding */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Responsive utilities for plain CSS */
+@media (min-width: 640px) {
+  .sm-px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-flex {
+    display: flex;
+  }
+  .md-flex-shrink-0 {
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg-px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

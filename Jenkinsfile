@@ -9,7 +9,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-token')
     }
     tools {
-        nodejs "node18"
+        nodejs "node20"
     }
 
     stages {

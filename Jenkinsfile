@@ -43,6 +43,8 @@ pipeline {
                         -Dsonar.projectKey=ModiniPadmaSree_ecom \
                         -Dsonar.organization=modinipadmasree \
                         -Dsonar.sources=.
+                        -Dsonar.exclusions=node_modules/** \
+                        -Dsonar.nodejs.executable=/usr/bin/node
                         """
                     }
                 }

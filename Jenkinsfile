@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
+
     environment {
         DOCKER_IMAGE_FRONTEND = "modinipadmasree/ecom-frontend"
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN = credentials('sonar-token')
+    }
+    tools {
+        nodejs "node20"
     }
 
     stages {
@@ -68,13 +72,15 @@ pipeline {
     post {
         success {
             slackSend(
-                channel: '#devops',
+                webhookUrl: credentials('slack-webhook'),
+                channel: 'Padma Sree',
                 message: "✅ Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
             )
         }
         failure {
             slackSend(
-                channel: '#devops',
+                webhookUrl: credentials('slack-webhook'),
+                channel: 'Padma Sree',
                 message: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
             )
         }

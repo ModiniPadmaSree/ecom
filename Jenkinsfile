@@ -34,16 +34,17 @@ pipeline {
 
         stage('SonarCloud Scan') {
             steps {
-                withSonarQubeEnv('SonarCloud') {
-                    sh '''
-                    sonar-scanner \
-                      -Dsonar.projectKey=ModiniPadmaSree_ecom \
-                      -Dsonar.organization=modinipadmasree \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=https://sonarcloud.io \
-                      -Dsonar.exclusions=**/*.py
-                      -Dsonar.exclusions=node_modules/**,build/**,dist/**,.git/** \
-                    '''
+                script{
+                     def scannerHome = tool 'sonar-scanner'
+                     withSonarQubeEnv('SonarCloud') {
+                         sh "${scannerHome}/bin/sonar-scanner
+                           -Dsonar.projectKey=ModiniPadmaSree_ecom \
+                           -Dsonar.organization=modinipadmasree \
+                           -Dsonar.sources=. \
+                           -Dsonar.host.url=https://sonarcloud.io \
+                           -Dsonar.exclusions=**/*.py
+                           -Dsonar.exclusions=node_modules/**,build/**,dist/**,.git/** \
+                     }                         
                 }
             }
         }

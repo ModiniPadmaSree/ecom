@@ -33,25 +33,22 @@ pipeline {
             }
         }
 
-        stage('SonarCloud Scan') {
-    options {
-        timeout(time: 10, unit: 'MINUTES')
-    }
-    steps {
-        script {
-            def scannerHome = tool 'sonar-scanner'
-            withSonarQubeEnv('SonarCloud') {
-                sh """
-                ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.projectKey=ModiniPadmaSree_ecom \
-                -Dsonar.organization=modinipadmasree \
-                -Dsonar.sources=client,server \
-                -Dsonar.javascript.node.maxspace=4096
-                """
+          stage('SonarCloud Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('SonarCloud') {
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=ModiniPadmaSree_ecom \
+                        -Dsonar.organization=modinipadmasree \
+                        -Dsonar.sources=.
+                        """
+                    }
+                }
             }
         }
-    }
-}
+        
 
         stage('Build Docker Images') {
             steps {
@@ -76,10 +73,10 @@ pipeline {
 
     post {
     success {
-        slackSend channel: 'Padma Sree', message: "Build Success"
+        slackSend channel: '#jenkins-ci', message: "Build Success"
     }
     failure {
-        slackSend channel: 'Padma Sree', message: "Build Failed"
+        slackSend channel: '#jenkins-ci', message: "Build Failed"
     }
 }
 }

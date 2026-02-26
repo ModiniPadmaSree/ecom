@@ -9,7 +9,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-token')
     }
     tools {
-        nodejs "node20"
+        nodejs "node18"
     }
 
     stages {
@@ -70,19 +70,24 @@ pipeline {
     }
 
     post {
-        success {
-            slackSend(
-                webhookUrl: credentials('slack-webhook'),
-                channel: 'Padma Sree',
-                message: "✅ Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
-            )
-        }
-        failure {
-            slackSend(
-                webhookUrl: credentials('slack-webhook'),
-                channel: 'Padma Sree',
-                message: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
-            )
+    success {
+        withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_URL')]) {
+            sh '''
+            curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"✅ Build Success: ${JOB_NAME} #${BUILD_NUMBER}\"}" \
+            $SLACK_URL
+            '''
         }
     }
+
+    failure {
+        withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_URL')]) {
+            sh '''
+            curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"❌ Build Failed: ${JOB_NAME} #${BUILD_NUMBER}\"}" \
+            $SLACK_URL
+            '''
+        }
+    }
+}
 }

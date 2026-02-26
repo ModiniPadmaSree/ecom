@@ -10,8 +10,24 @@ pipeline {
     }
     tools {
         nodejs "node20"
-        sonarRunner "sonar-scanner"
     }
+    stage('SonarCloud Scan') {
+    steps {
+        script {
+            def scannerHome = tool 'sonar-scanner'
+            withSonarQubeEnv('SonarCloud') {
+                sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=ModiniPadmaSree_ecom \
+                -Dsonar.organization=modinipadmasree \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.login=$SONAR_TOKEN
+                """
+            }
+        }
+    }
+}
 
     stages {
 

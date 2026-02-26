@@ -34,22 +34,24 @@ pipeline {
         }
 
         stage('SonarCloud Scan') {
-            steps {
-                script {
-                    def scannerHome = tool 'sonar-scanner'
-                    withSonarQubeEnv('SonarCloud') {
-                        sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=ModiniPadmaSree_ecom \
-                        -Dsonar.organization=modinipadmasree \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=$SONAR_TOKEN
-                        """
-                    }
-                }
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+    }
+    steps {
+        script {
+            def scannerHome = tool 'sonar-scanner'
+            withSonarQubeEnv('SonarCloud') {
+                sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=ModiniPadmaSree_ecom \
+                -Dsonar.organization=modinipadmasree \
+                -Dsonar.sources=frontend,backend \
+                -Dsonar.javascript.node.maxspace=4096
+                """
             }
         }
+    }
+}
 
         stage('Build Docker Images') {
             steps {

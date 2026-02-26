@@ -45,7 +45,7 @@ pipeline {
                 ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=ModiniPadmaSree_ecom \
                 -Dsonar.organization=modinipadmasree \
-                -Dsonar.sources=frontend,backend \
+                -Dsonar.sources=client,server \
                 -Dsonar.javascript.node.maxspace=4096
                 """
             }

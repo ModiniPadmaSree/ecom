@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./server
+    image: "${DOCKERHUB_USER}/ecom-backend:latest"
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./server/.env
+    networks:
+      - ecom-network
+
+  frontend:
+    build: ./client
+    image: "${DOCKERHUB_USER}/ecom-frontend:latest"
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - ecom-network
+
+networks:
+  ecom-network:
+    driver: bridge

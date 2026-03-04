@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-const API = process.env.REACT_APP_API_URL;
+
 const OrderDetailsPage = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
@@ -13,7 +13,7 @@ const OrderDetailsPage = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        `${API}/api/v1/order/${id}`,
+        "/api/v1/order/${id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,

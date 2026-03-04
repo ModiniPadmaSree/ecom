@@ -12,9 +12,9 @@ const MyOrdersPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const config = { headers: { Authorization: `Bearer ${token}` } };
-        const { data } = await axios.get("/api/v1/orders/me", config);
+         const { data } = await axios.get("/api/v1/orders/me", {
+          withCredentials: true,
+        });
         setOrders(data.orders);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
@@ -22,9 +22,8 @@ const MyOrdersPage = () => {
         setLoading(false);
       }
     };
-
     fetchOrders();
-  }, []);
+}, []);
 
   return (
     <div className={styles.container}>

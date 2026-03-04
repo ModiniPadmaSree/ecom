@@ -82,7 +82,7 @@ const PlaceOrderPage = () => {
       };
 
       const { data: orderData } = await axios.post(
-        `${API}/api/v1/order/new`,
+        "/api/v1/order/new",
         orderPayload,
         config
       );

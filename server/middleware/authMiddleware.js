@@ -1,4 +1,4 @@
-// backend/middleware/authMiddleware.js
+	// backend/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const { CustomErrorHandler, catchAsyncErrors } = require('./errorMiddleware');

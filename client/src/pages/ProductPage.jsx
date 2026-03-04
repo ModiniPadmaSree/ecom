@@ -20,11 +20,11 @@ const ProductPage = () => {
         setLoading(true);
 
         // Fetch product details
-        const { data: productData } = await axios.get("/api/v1/product/${id}");
+        const { data: productData } = await axios.get(`/api/v1/product/${id}`);
         setProduct(productData.product);
 
         // Fetch product reviews
-        const { data: reviewsData } = await axios.get("/api/reviews/${id}");
+        const { data: reviewsData } = await axios.get(`/api/reviews/${id}`);
         setReviews(reviewsData);
 
         setLoading(false);

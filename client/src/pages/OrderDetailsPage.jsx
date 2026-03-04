@@ -13,7 +13,7 @@ const OrderDetailsPage = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "/api/v1/order/${id}",
+        `/api/v1/order/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

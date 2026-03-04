@@ -23,7 +23,7 @@ const CartPage = () => {
       if (productId) {
         setLoading(true);
         try {
-          const { data } = await axios.get("/api/v1/product/${productId}");
+          const { data } = await axios.get(`/api/v1/product/${productId}`);
           const newItem = {
             product: data.product._id,
             name: data.product.name,

@@ -97,17 +97,18 @@ pipeline {
                         passwordVariable: 'GIT_TOKEN'
                     )]) {
                         sh """
-                        wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-                        chmod +x /usr/local/bin/yq
-
+                        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+                        sudo chmod +x /usr/local/bin/yq
+                        '''
+                        sh """   
                         git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git
                         cd ecom-k8s
 
                         yq e -i '.backend.image = "modinipadmasree/ecom-backend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         yq e -i '.frontend.image = "modinipadmasree/ecom-frontend:${BUILD_NUMBER}"' ecom-chart/values.yaml
 
-                        git config user.email "jenkins@nexmart.com"
-                        git config user.name "Jenkins"
+                        git config user.email "modinisree@gmail.com"
+                        git config user.name "ModiniPadmaSree"
                         git add ecom-chart/values.yaml
                         git commit -m "Update images to ${BUILD_NUMBER} [skip ci]"
                         git push https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git main

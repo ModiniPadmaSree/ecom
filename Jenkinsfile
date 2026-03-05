@@ -9,7 +9,6 @@ pipeline {
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN = credentials('sonar-token')
-        BRANCH_NAME = "${env.BRANCH_NAME}"  // ✅ auto set by multibranch
     }
     stages {
         stage('Checkout Code') {
@@ -83,11 +82,9 @@ pipeline {
                 }
             }
         }
-
-        // ✅ Only update GitOps on main branch
         stage('Update Image Tag in Helm Chart') {
             when {
-                branch 'main'  // ✅ only deploy from main branch
+                branch 'main'
             }
             steps {
                 script {
@@ -96,21 +93,22 @@ pipeline {
                         usernameVariable: 'GIT_USER',
                         passwordVariable: 'GIT_TOKEN'
                     )]) {
-                        sh """
+                        // ✅ Step 1 - install yq (single quotes - no variable interpolation)
+                        sh '''
                         sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
                         sudo chmod +x /usr/local/bin/yq
                         '''
-                        sh """   
+
+                        // ✅ Step 2 - update and push (double quotes - needs variables)
+                        sh """
                         git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git
                         cd ecom-k8s
-
                         yq e -i '.backend.image = "modinipadmasree/ecom-backend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         yq e -i '.frontend.image = "modinipadmasree/ecom-frontend:${BUILD_NUMBER}"' ecom-chart/values.yaml
-
                         git config user.email "modinisree@gmail.com"
                         git config user.name "ModiniPadmaSree"
                         git add ecom-chart/values.yaml
-                        git commit -m "Update images to ${BUILD_NUMBER} [skip ci]"
+                        git commit -m "Update images to ${BUILD_NUMBER}"
                         git push https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git main
                         """
                     }
@@ -135,5 +133,3 @@ pipeline {
         }
     }
 }
-
-

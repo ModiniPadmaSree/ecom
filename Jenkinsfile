@@ -9,6 +9,7 @@ pipeline {
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN = credentials('sonar-token')
+        BRANCH_NAME = "${env.BRANCH_NAME}"  // ✅ auto set by multibranch
     }
     stages {
         stage('Checkout Code') {
@@ -82,21 +83,56 @@ pipeline {
                 }
             }
         }
+
+        // ✅ Only update GitOps on main branch
+        stage('Update Image Tag in Helm Chart') {
+            when {
+                branch 'main'  // ✅ only deploy from main branch
+            }
+            steps {
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github-creds',
+                        usernameVariable: 'GIT_USER',
+                        passwordVariable: 'GIT_TOKEN'
+                    )]) {
+                        sh """
+                        wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+                        chmod +x /usr/local/bin/yq
+
+                        git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git
+                        cd ecom-k8s
+
+                        yq e -i '.backend.image = "modinipadmasree/ecom-backend:${BUILD_NUMBER}"' ecom-chart/values.yaml
+                        yq e -i '.frontend.image = "modinipadmasree/ecom-frontend:${BUILD_NUMBER}"' ecom-chart/values.yaml
+
+                        git config user.email "jenkins@nexmart.com"
+                        git config user.name "Jenkins"
+                        git add ecom-chart/values.yaml
+                        git commit -m "Update images to ${BUILD_NUMBER} [skip ci]"
+                        git push https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git main
+                        """
+                    }
+                }
+            }
+        }
     }
     post {
         success {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'good',
-                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - All security scans passed!"
+                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Branch: ${env.BRANCH_NAME} - Image: :${env.BUILD_NUMBER}!"
             )
         }
         failure {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'danger',
-                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Check security scan results!"
+                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Branch: ${env.BRANCH_NAME}"
             )
         }
     }
 }
+
+

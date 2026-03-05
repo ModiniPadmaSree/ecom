@@ -87,6 +87,7 @@ pipeline {
                 script {
                     sh """
                     docker run --rm \
+                        -v \$(pwd):/zap/wrk/:rw \
                         ghcr.io/zaproxy/zaproxy:stable \
                         zap-baseline.py \
                         -t http://k8s-ecom-ecomingr-56c89b259d-1063378090.us-east-1.elb.amazonaws.com \

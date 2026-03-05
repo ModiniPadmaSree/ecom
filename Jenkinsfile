@@ -4,34 +4,28 @@ pipeline {
     tools {
         nodejs "node20"
     }
-
     environment {
         DOCKER_IMAGE_FRONTEND = "modinipadmasree/ecom-frontend"
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN = credentials('sonar-token')
     }
-
     stages {
-
         stage('Checkout Code') {
             steps {
                 checkout scm
             }
         }
-
         stage('Install Backend Dependencies') {
             steps {
                 sh 'cd server && npm install'
             }
         }
-
         stage('Run Backend Tests') {
             steps {
                 sh 'cd server && npm test'
             }
         }
-
         stage('SonarCloud Scan') {
             steps {
                 script {
@@ -50,7 +44,6 @@ pipeline {
                 }
             }
         }
-
         stage('Build Docker Images') {
             steps {
                 script {
@@ -89,35 +82,46 @@ pipeline {
                 }
             }
         }
-    }
-       stage('OWASP ZAP Scan') {
-           steps {
-               script {
-                   sh """
-                   docker run --rm \
-                       ghcr.io/zaproxy/zaproxy:stable \
-                       zap-baseline.py \
-                      -t http://k8s-ecom-ecomingr-56c89b259d-1063378090.us-east-1.elb.amazonaws.com \
-                      -r zap-report.html \
-                      -I
-                   """
-               }
-           }
-       }
+        stage('OWASP ZAP Scan') {       // ✅ now inside stages block
+            steps {
+                script {
+                    sh """
+                    docker run --rm \
+                        ghcr.io/zaproxy/zaproxy:stable \
+                        zap-baseline.py \
+                        -t http://k8s-ecom-ecomingr-56c89b259d-1063378090.us-east-1.elb.amazonaws.com \
+                        -r zap-report.html \
+                        -I
+                    """
+                }
+            }
+        }
+    }   // ✅ stages closes here
     post {
+        always {
+            publishHTML(target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'zap-report.html',
+                reportName: 'OWASP ZAP Report'
+            ])
+        }
         success {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'good',
-                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - All security scans passed!"
             )
         }
         failure {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'danger',
-                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Check security scan results!"
             )
         }
     }
 }
+

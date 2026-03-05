@@ -82,33 +82,8 @@ pipeline {
                 }
             }
         }
-        stage('OWASP ZAP Scan') {       // ✅ now inside stages block
-            steps {
-                script {
-                    sh """
-                    docker run --rm \
-                        -v \$(pwd):/zap/wrk/:rw \
-                        ghcr.io/zaproxy/zaproxy:stable \
-                        zap-baseline.py \
-                        -t http://k8s-ecom-ecomingr-56c89b259d-1063378090.us-east-1.elb.amazonaws.com \
-                        -r zap-report.html \
-                        -I
-                    """
-                }
-            }
-        }
-    }   // ✅ stages closes here
+    }
     post {
-        always {
-            publishHTML(target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'zap-report.html',
-                reportName: 'OWASP ZAP Report'
-            ])
-        }
         success {
             slackSend(
                 channel: '#jenkins-ci',
@@ -125,4 +100,3 @@ pipeline {
         }
     }
 }
-

@@ -59,7 +59,26 @@ pipeline {
                 }
             }
         }
-
+        stage('Trivy Image Scan') {
+            steps {
+                script {
+                    sh """
+                    trivy image \
+                        --exit-code 1 \
+                        --severity CRITICAL \
+                        --no-progress \
+                        ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER}
+                    """
+                    sh """
+                    trivy image \
+                        --exit-code 1 \
+                        --severity CRITICAL \
+                        --no-progress \
+                        ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER}
+                    """
+                }
+            }
+        }
         stage('Push Docker Images') {
             steps {
                 script {
@@ -71,7 +90,20 @@ pipeline {
             }
         }
     }
-
+       stage('OWASP ZAP Scan') {
+           steps {
+               script {
+                   sh """
+                   docker run --rm \
+                       ghcr.io/zaproxy/zaproxy:stable \
+                       zap-baseline.py \
+                      -t http://k8s-ecom-ecomingr-56c89b259d-1063378090.us-east-1.elb.amazonaws.com \
+                      -r zap-report.html \
+                      -I
+                   """
+               }
+           }
+       }
     post {
         success {
             slackSend(

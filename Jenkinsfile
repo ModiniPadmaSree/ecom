@@ -93,13 +93,7 @@ pipeline {
                         usernameVariable: 'GIT_USER',
                         passwordVariable: 'GIT_TOKEN'
                     )]) {
-                        // ✅ Step 1 - install yq (single quotes - no variable interpolation)
-                        sh '''
-                        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-                        sudo chmod +x /usr/local/bin/yq
-                        '''
-
-                        // ✅ Step 2 - update and push (double quotes - needs variables)
+                    
                         sh """
                         git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git
                         cd ecom-k8s

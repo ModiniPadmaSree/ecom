@@ -106,10 +106,6 @@ pipeline {
             }
         }
         stage('Update Image Tag in Helm Chart') {
-            when {
-                branch 'main'
-            }
-        stage('Update Image Tag in Helm Chart') {
             steps {
                 script {
                     withCredentials([usernamePassword(

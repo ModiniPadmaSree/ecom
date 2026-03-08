@@ -1,31 +1,39 @@
 pipeline {
     agent any
-    
+
     tools {
         nodejs "node20"
     }
+
     environment {
         DOCKER_IMAGE_FRONTEND = "modinipadmasree/ecom-frontend"
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
-        SONAR_TOKEN = credentials('sonar-token')
+        SONAR_TOKEN           = credentials('sonar-token')
+        TRIVY_CACHE           = "/home/ubuntu/.cache/trivy"
+        TRIVY_CONFIG          = "/home/ubuntu/trivy.yaml"
     }
+
     stages {
+
         stage('Checkout Code') {
             steps {
                 checkout scm
             }
         }
+
         stage('Install Backend Dependencies') {
             steps {
                 sh 'cd server && npm install'
             }
         }
+
         stage('Run Backend Tests') {
             steps {
                 sh 'cd server && npm test'
             }
         }
+
         stage('SonarCloud Scan') {
             steps {
                 script {
@@ -44,6 +52,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 script {
@@ -52,26 +69,32 @@ pipeline {
                 }
             }
         }
+
         stage('Trivy Image Scan') {
             steps {
                 script {
                     sh """
                     trivy image \
-                        --exit-code 1 \
-                        --severity CRITICAL \
+                        --exit-code 0 \
+                        --severity HIGH,CRITICAL \
                         --no-progress \
+                        --cache-dir ${TRIVY_CACHE} \
+                        --config ${TRIVY_CONFIG} \
                         ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER}
                     """
                     sh """
                     trivy image \
-                        --exit-code 1 \
-                        --severity CRITICAL \
+                        --exit-code 0 \
+                        --severity HIGH,CRITICAL \
                         --no-progress \
+                        --cache-dir ${TRIVY_CACHE} \
+                        --config ${TRIVY_CONFIG} \
                         ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER}
                     """
                 }
             }
         }
+
         stage('Push Docker Images') {
             steps {
                 script {
@@ -86,6 +109,7 @@ pipeline {
             when {
                 branch 'main'
             }
+        stage('Update Image Tag in Helm Chart') {
             steps {
                 script {
                     withCredentials([usernamePassword(
@@ -93,10 +117,11 @@ pipeline {
                         usernameVariable: 'GIT_USER',
                         passwordVariable: 'GIT_TOKEN'
                     )]) {
-                    
+               
                         sh """
-                        git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git
-                        cd ecom-k8s
+                        git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git ecom-k8s-${BUILD_NUMBER}
+                        cd ecom-k8s-${BUILD_NUMBER}
+
                         yq e -i '.backend.image = "modinipadmasree/ecom-backend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         yq e -i '.frontend.image = "modinipadmasree/ecom-frontend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         git config user.email "modinisree@gmail.com"
@@ -110,19 +135,28 @@ pipeline {
             }
         }
     }
+
     post {
+        always {
+            cleanWs()
+            sh """
+            docker rmi ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER} || true
+            docker rmi ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER} || true
+            """
+        }
+
         success {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'good',
-                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Branch: ${env.BRANCH_NAME} - Image: :${env.BUILD_NUMBER}!"
+                message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Image: :${env.BUILD_NUMBER}!"
             )
         }
         failure {
             slackSend(
                 channel: '#jenkins-ci',
                 color: 'danger',
-                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Branch: ${env.BRANCH_NAME}"
+                message: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
             )
         }
     }

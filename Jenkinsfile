@@ -13,10 +13,6 @@ pipeline {
         TRIVY_CACHE           = "/var/lib/jenkins/.cache/trivy"
     }
 
-    triggers {
-        githubPush()
-    }
-
     stages {
 
         stage('Checkout Code') {

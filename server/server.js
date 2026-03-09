@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
+const morgan = require('morgan');
 
 // Load environment variables
 dotenv.config();
@@ -18,7 +19,7 @@ const connectDB = require('./config/db');
 // =====================
 // Middleware
 // =====================
-
+app.use(morgan('combined'));
 app.use(express.json());
 app.use(cookieParser());
 

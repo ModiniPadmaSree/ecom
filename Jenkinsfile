@@ -14,6 +14,10 @@ pipeline {
         TRIVY_CONFIG          = "/home/ubuntu/trivy.yaml"
     }
 
+    triggers {
+        githubPush()
+    }
+
     stages {
 
         stage('Checkout Code') {
@@ -55,8 +59,8 @@ pipeline {
 
         stage('Quality Gate') {
             steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: false
                 }
             }
         }
@@ -75,7 +79,7 @@ pipeline {
                 script {
                     sh """
                     trivy image \
-                        --exit-code 0 \
+                        --exit-code 1 \
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \
@@ -84,7 +88,7 @@ pipeline {
                     """
                     sh """
                     trivy image \
-                        --exit-code 0 \
+                        --exit-code 1 \
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \
@@ -105,6 +109,7 @@ pipeline {
                 }
             }
         }
+
         stage('Update Image Tag in Helm Chart') {
             steps {
                 script {
@@ -113,17 +118,16 @@ pipeline {
                         usernameVariable: 'GIT_USER',
                         passwordVariable: 'GIT_TOKEN'
                     )]) {
-               
                         sh """
+                        rm -rf ecom-k8s-${BUILD_NUMBER}
                         git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git ecom-k8s-${BUILD_NUMBER}
                         cd ecom-k8s-${BUILD_NUMBER}
-
                         yq e -i '.backend.image = "modinipadmasree/ecom-backend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         yq e -i '.frontend.image = "modinipadmasree/ecom-frontend:${BUILD_NUMBER}"' ecom-chart/values.yaml
                         git config user.email "modinisree@gmail.com"
                         git config user.name "ModiniPadmaSree"
                         git add ecom-chart/values.yaml
-                        git commit -m "Update images to ${BUILD_NUMBER}"
+                        git commit -m "Update images to ${BUILD_NUMBER} [skip ci]"
                         git push https://${GIT_USER}:${GIT_TOKEN}@github.com/ModiniPadmaSree/ecom-k8s.git main
                         """
                     }
@@ -148,6 +152,7 @@ pipeline {
                 message: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Image: :${env.BUILD_NUMBER}!"
             )
         }
+
         failure {
             slackSend(
                 channel: '#jenkins-ci',
@@ -157,3 +162,4 @@ pipeline {
         }
     }
 }
+

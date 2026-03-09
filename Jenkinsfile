@@ -11,7 +11,6 @@ pipeline {
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN           = credentials('sonar-token')
         TRIVY_CACHE           = "/home/ubuntu/.cache/trivy"
-        TRIVY_CONFIG          = "/home/ubuntu/trivy.yaml"
     }
 
     triggers {
@@ -90,7 +89,6 @@ pipeline {
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \
-                        --config ${TRIVY_CONFIG} \
                         ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER}
                     """
                     sh """
@@ -99,7 +97,6 @@ pipeline {
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \
-                        --config ${TRIVY_CONFIG} \
                         ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER}
                     """
                 }

@@ -24,7 +24,7 @@ const ProductPage = () => {
         setProduct(productData.product);
 
         // Fetch product reviews
-        const { data: reviewsData } = await axios.get(`/api/reviews/${id}`);
+        const { data: reviewsData } = await axios.get(`/api/v1/reviews/${id}`);
         setReviews(reviewsData);
 
         setLoading(false);

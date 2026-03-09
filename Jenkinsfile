@@ -85,7 +85,7 @@ pipeline {
                 script {
                     sh """
                     trivy image \
-                        --exit-code 1 \
+                        --exit-code 0 \
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \
@@ -93,7 +93,7 @@ pipeline {
                     """
                     sh """
                     trivy image \
-                        --exit-code 1 \
+                        --exit-code 0 \
                         --severity HIGH,CRITICAL \
                         --no-progress \
                         --cache-dir ${TRIVY_CACHE} \

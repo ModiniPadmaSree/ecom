@@ -10,7 +10,7 @@ pipeline {
         DOCKER_IMAGE_BACKEND  = "modinipadmasree/ecom-backend"
         DOCKER_CREDENTIALS_ID = "dockerhub-creds"
         SONAR_TOKEN           = credentials('sonar-token')
-        TRIVY_CACHE           = "/home/ubuntu/.cache/trivy"
+        TRIVY_CACHE           = "/var/lib/jenkins/.cache/trivy"
     }
 
     triggers {

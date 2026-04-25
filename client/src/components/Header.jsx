@@ -143,7 +143,6 @@ const Header = () => {
         <nav className={styles['header-nav']}>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/">About</Link></li>
             <li><a href="#contact" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>Contact Us</a></li>
             <li><Link to="/cart">Cart</Link></li>
 
